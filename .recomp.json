@@ -1,0 +1,12 @@
+{
+  "$schema": "https://recomp.fyi/schema/v1.json",
+  "game": "Tornado Jockey",
+  "system": "PC (Windows)",
+  "type": "port",
+  "project": "Tornado Jockey Recomp",
+  "status": "in-progress",
+  "targets": ["Windows"],
+  "toolchain": "Direct3D 12",
+  "approach": "The original executable runs beside a d3d8 proxy that adds control, replay and a native Direct3D 12 renderer",
+  "maintainers": [{ "name": "siruiusamory-cmyk", "link": "https://github.com/siruiusamory-cmyk" }]
+}

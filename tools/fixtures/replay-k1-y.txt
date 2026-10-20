@@ -1,0 +1,27 @@
+# K1(b) probe fixture: the menu-level1 replay plus one scripted WM_MOUSEMOVE at
+# Present 3560 holding the pointer at the top edge (x=299, y=20), so the
+# position delta over Presents 3560..3680 can be compared with the control run.
+# Coordinates are the 600x450 client frame, (x | y << 16).
+frame 10 activate
+frame 400 message 0x200 0 0x00AC01DC
+frame 404 message 0x201 1 0x00AC01DC
+frame 408 message 0x202 0 0x00AC01DC
+frame 430 message 0x102 0x52 1
+frame 434 message 0x102 0x45 1
+frame 438 message 0x102 0x50 1
+frame 442 message 0x102 0x4C 1
+frame 446 message 0x102 0x41 1
+frame 450 message 0x102 0x59 1
+frame 470 message 0x200 0 0x011900E1
+frame 474 message 0x201 1 0x011900E1
+frame 478 message 0x202 0 0x011900E1
+frame 700 message 0x200 0 0x010E00F0
+frame 704 message 0x201 1 0x010E00F0
+frame 708 message 0x202 0 0x010E00F0
+frame 2600 message 0x200 0 0x0190012B
+frame 2604 message 0x201 1 0x0190012B
+frame 2608 message 0x202 0 0x0190012B
+frame 3300 message 0x200 0 0x0187012B
+frame 3304 message 0x201 1 0x0187012B
+frame 3308 message 0x202 0 0x0187012B
+frame 3560 message 0x200 0 0x0014012B

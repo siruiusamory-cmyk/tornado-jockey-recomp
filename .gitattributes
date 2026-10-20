@@ -1,0 +1,25 @@
+* text=auto eol=lf
+
+port/D3D8_CALL_SITES.md -text
+port/D3D8_USAGE.md -text
+port/proxy/d3d8_proxy.cpp -text
+port/proxy/keep_local.h -text
+port/proxy/render/render.h -text
+port/proxy/render/render_d3d12.h -text
+port/proxy/render/render_d3d12_impl1.h -text
+port/proxy/render/render_d3d12_impl2.h -text
+port/proxy/render/render_d3d12_impl3.h -text
+port/proxy/render/render_legacy.h -text
+port/proxy/render/shaders/tj.hlsl -text
+tools/build-d3d8to9.ps1 -text
+tools/build-proxy.ps1 -text
+tools/dump_image.py -text
+tools/find_iat_calls.py -text
+tools/fixtures/replay-snapshot.txt -text
+tools/fixtures/replay-step-perturbed.txt -text
+tools/ghidra_probe.py -text
+tools/imports.py -text
+tools/pe_report.py -text
+tools/proxy-run.ps1 -text
+tools/rand-catch.ps1 -text
+tools/test_bmp.py -text

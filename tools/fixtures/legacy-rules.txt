@@ -1,0 +1,51 @@
+# Pins the pre-repair D3D12 rules the RED build compiles: the draw whose index count and expansion
+# the guard replaced, the texture-slot allocator, and the lines the transcription quotes.
+# Copied verbatim from the source each repair removed; tools/test_fixed_function.py reads it, so no
+# test needs repository history. Section titles are `## <name>`; the body is source text.
+## red draw
+    UINT* expanded = new UINT[vertices];
+    if (primitive == 4) {
+        for (unsigned i = 0; i < vertices; ++i) expanded[i] = indexList ? indexList[i] : (UINT)i;
+    } else {
+        unsigned at = 0;
+        for (unsigned t = 0; t < triangles; ++t) {
+            if (primitive == 5) {
+                UINT a = indexList ? indexList[t] : (UINT)t;
+                UINT b = indexList ? indexList[t + 1] : (UINT)(t + 1);
+                UINT c = indexList ? indexList[t + 2] : (UINT)(t + 2);
+                if (t & 1) {
+                    expanded[at++] = b;
+                    expanded[at++] = a;
+                    expanded[at++] = c;
+                } else {
+                    expanded[at++] = a;
+                    expanded[at++] = b;
+                    expanded[at++] = c;
+                }
+            } else {
+                UINT a = indexList ? indexList[0] : 0;
+                UINT b = indexList ? indexList[t + 1] : (UINT)(t + 1);
+                UINT c = indexList ? indexList[t + 2] : (UINT)(t + 2);
+                expanded[at++] = a;
+                expanded[at++] = b;
+                expanded[at++] = c;
+            }
+        }
+    }
+    unsigned offset = emit(base, expanded, vertices, firstIndex);
+    list->DrawInstanced(vertices, 1, 0, 0);
+## texture slot allocator
+    t->srv = device->nextSrv;
+    device->nextSrv = device->nextSrv > Device12::kRingLimit + 1 ? device->nextSrv - 1
+                                                                 : Device12::kRingLimit + 1;
+## texture slot constants
+    static constexpr unsigned kDescriptors = 2048;
+    static constexpr unsigned kRingLimit = 1024;
+    unsigned nextSrv = kDescriptors - 1;  // 0 is the white texel, 1.. are the per-draw pairs
+## transcribed rules
+    if (rs[kRsAlphaTest] && (rs[kRsAlphaFunc] == 7 || rs[kRsAlphaFunc] == 5)) {
+    if (rs[kRsFogEnable] && (rs[kRsFogTableMode] || rs[kRsFogVertexMode])) params.flags |= 8;
+        rs[kRsBlendOp] == 2 || rs[kRsBlendOp] == 3 ? d.BlendState.RenderTarget[0].BlendOp
+    if (op0 != 1) c = stage_apply(op0, arg00, arg01, aop0, aarg00, aarg01, c, i.color, t0, factor,
+    if (op1 != 1) c = stage_apply(op1, arg10, arg11, aop1, aarg10, aarg11, c, i.color, t1, factor,
+    r.fence = fenceValue + 1;

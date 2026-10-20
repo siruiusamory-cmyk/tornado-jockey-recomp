@@ -1,0 +1,39 @@
+# Replay: drive the title screen into the first level, frame-keyed to the Present ordinal.
+# The engine reads input as window messages to its own window (port/API_MAP.md, "TJ-STAGE-06D"),
+# so an event posts one message: `frame <n> message <msg> <wparam> <lparam>`, lparam holding
+# client pixel coordinates. Coordinates are the 600x450 client frame, (x | y << 16).
+# The save name is fixed, so every run after the first meets the restart-confirmation
+# dialog and answers it the same way.
+# Clock, frozen in port/proxy/replay_script.h and virtual from the process's first wrapped
+# call: seed 3000000000000 ticks at 60000000 Hz, FILETIME base 127805472000000000
+# (2006-01-01T00:00:00Z), QPC +1000 and the FILETIME +166666 per call.
+# Cursor, frozen the same way: GetCursorPos answers with the client origin plus (0,0), and a
+# WM_MOUSEMOVE is posted at Present 1, so the game's software cursor is in the same client
+# pixel every run instead of following the desktop pointer.
+# Boot fetch, same rule: the IE control's CoCreateInstance is answered "not registered" in
+# replay, so no navigation, no network and no worker-thread timing enters the run.
+frame 10 activate
+frame 400 message 0x200 0 0x00AC01DC
+frame 404 message 0x201 1 0x00AC01DC
+frame 408 message 0x202 0 0x00AC01DC
+frame 430 message 0x102 0x52 1
+frame 434 message 0x102 0x45 1
+frame 438 message 0x102 0x50 1
+frame 442 message 0x102 0x4C 1
+frame 446 message 0x102 0x41 1
+frame 450 message 0x102 0x59 1
+frame 470 message 0x200 0 0x011900E1
+frame 474 message 0x201 1 0x011900E1
+frame 478 message 0x202 0 0x011900E1
+frame 700 message 0x200 0 0x010E00F0
+frame 704 message 0x201 1 0x010E00F0
+frame 708 message 0x202 0 0x010E00F0
+frame 2600 message 0x200 0 0x0190012B
+frame 2604 message 0x201 1 0x0190012B
+frame 2608 message 0x202 0 0x0190012B
+frame 3300 message 0x200 0 0x0187012B
+frame 3304 message 0x201 1 0x0187012B
+frame 3308 message 0x202 0 0x0187012B
+# K2: the scripted key D (VK 68) held from Present 3560 to 3680.
+frame 3560 key 68 1
+frame 3680 key 68 0
